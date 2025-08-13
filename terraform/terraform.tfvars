@@ -15,10 +15,6 @@ service_account = {
   ]
 }
 buckets = {
-  github-ci-bucket = {
-    location = "EUROPE-WEST4"
-    force_destory = true
-  }
   test-bucket-rajat = {
     location      = "EUROPE-WEST4"
     force_destroy = true
@@ -64,17 +60,5 @@ cloud_sql_users = {
 cloud_sql_databases = {
   webshop_analytics = {
     instance = "assessment-v2-1"
-  }
-}
-cloud_sql_users_1 = {
-  rajat = {
-    instance = "assessment-v2"
-    password = "Assessment@123"
-  }
-}
-
-cloud_sql_databases_1 = {
-  webshop_analytics_db = {
-    instance = "assessment-v2"
   }
 }
