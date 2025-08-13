@@ -1,4 +1,4 @@
-iname: Terraform GCP
+name: Terraform GCP
 
 on:
   pull_request:
