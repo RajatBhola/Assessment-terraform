@@ -15,6 +15,10 @@ service_account = {
   ]
 }
 buckets = {
+  github-ci-bucket = {
+    location = "EUROPE-WEST4"
+    force_destory = true
+  }
   test-bucket-rajat = {
     location      = "EUROPE-WEST4"
     force_destroy = true
