@@ -1,0 +1,88 @@
+iname: Terraform GCP
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  GOOGLE_PROJECT: rajat-assessment-project
+  TF_WORKING_DIR: terraform
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.7
+
+      - name: Auth to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set project
+        run: gcloud config set project rajat-assessment-project
+
+      - name: Terraform Init
+        run: terraform -chdir=$TF_WORKING_DIR init
+
+      - name: Terraform Validate
+        run: terraform -chdir=$TF_WORKING_DIR validate
+
+      - name: Terraform Plan
+        run: terraform -chdir=$TF_WORKING_DIR plan -no-color -out=tfplan
+
+      - name: Upload plan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: terraform/tfplan
+
+  apply:
+    needs: [plan]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+    concurrency:
+      group: terraform-apply
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.7
+
+      - name: Auth to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set project
+        run: gcloud config set project rajat-assessment-project
+
+      - name: Terraform Init
+        run: terraform -chdir=$TF_WORKING_DIR init
+
+      - name: Download plan
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+          path: terraform
+
+      - name: Terraform Apply
+        run: terraform -chdir=$TF_WORKING_DIR apply -auto-approve tfplan
+
