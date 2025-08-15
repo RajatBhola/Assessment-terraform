@@ -11,7 +11,8 @@ service_account = {
   roles = [
     "roles/run.invoker",
     "roles/storage.admin",
-    "roles/cloudsql.client"
+    "roles/cloudsql.client",
+    "roles/artifactregistry.writer"
   ]
 }
 buckets = {
