@@ -11,7 +11,7 @@ service_account = {
   roles = [
     "roles/run.invoker",
     "roles/storage.admin",
-    "roles/cloudsql.client",
+    "roles/cloudsql.admin",
     "roles/artifactregistry.writer"
   ]
 }
@@ -48,13 +48,6 @@ cloud_sql_instances = {
     ipv4_enabled        = true
     authorized_networks = [{ name = "allow-all", value = "0.0.0.0/0" }]
     deletion_protection = false
-  }
-}
-
-cloud_sql_users = {
-  rajat = {
-    instance = "assessment-v2-1"
-    password = "Assessment@123"
   }
 }
 
