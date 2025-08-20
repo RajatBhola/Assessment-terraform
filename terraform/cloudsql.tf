@@ -28,4 +28,5 @@ resource "google_sql_database" "databases" {
   for_each = var.cloud_sql_databases
   name     = each.key
   instance = each.value.instance
+  depends_on = [google_project_iam_member]
 }
