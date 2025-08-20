@@ -17,8 +17,7 @@ resource "google_service_account" "cloudrun_sa" {
 
 resource "google_project_iam_member" "service_account_roles" {
   for_each = toset(var.service_account.roles)
-
-  project = var.project_id
-  role    = each.value
-  member  = "serviceAccount:${google_service_account.cloudrun_sa.email}"
+  project  = var.project_id
+  role     = each.value
+  member   = "serviceAccount:${google_service_account.cloudrun_sa.email}"
 }
