@@ -23,12 +23,6 @@ resource "google_sql_database_instance" "instances" {
   depends_on = [google_project_service.enabled_services]
 }
 
-resource "google_sql_user" "users" {
-  for_each = var.cloud_sql_users
-  name     = each.key
-  instance = each.value.instance
-  password = each.value.password
-}
 
 resource "google_sql_database" "databases" {
   for_each = var.cloud_sql_databases
