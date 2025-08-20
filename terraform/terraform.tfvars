@@ -6,7 +6,7 @@ services = [
 
 service_account = {
   name         = "cloudrun_sa"
-  account_id   = "test-sa-cloudrun"
+  account_id   = "sa-cloudrun"
   display_name = "Framework Service Account"
   roles = [
     "roles/run.invoker",
