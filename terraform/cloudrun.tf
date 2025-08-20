@@ -16,7 +16,7 @@ resource "google_cloud_run_v2_job" "jobs" {
         args  = each.value.args
       }
       service_account = google_service_account.cloudrun_sa.email
-      
+
       volumes {
         name = "cloudsql"
         cloud_sql_instance {
