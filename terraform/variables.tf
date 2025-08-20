@@ -55,14 +55,6 @@ variable "cloud_sql_instances" {
   }))
 }
 
-variable "cloud_sql_users" {
-  description = "Map of Cloud SQL users"
-  type = map(object({
-    instance = string
-    password = string
-  }))
-}
-
 variable "cloud_sql_databases" {
   description = "Map of Cloud SQL databases"
   type = map(object({
