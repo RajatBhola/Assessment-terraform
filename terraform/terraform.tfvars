@@ -6,7 +6,7 @@ services = [
 
 service_account = {
   name         = "cloudrun_sa"
-  account_id   = "sa-cloudrun"
+  account_id   = "sa-cloudrun-1"
   display_name = "Framework Service Account"
   roles = [
     "roles/run.invoker",
@@ -16,7 +16,7 @@ service_account = {
   ]
 }
 buckets = {
-  test-bucket-rajat = {
+  test-bucket-rajat-1 = {
     location      = "EUROPE-WEST4"
     force_destroy = true
   }
