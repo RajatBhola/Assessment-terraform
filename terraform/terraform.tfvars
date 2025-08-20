@@ -42,7 +42,7 @@ cloud_run_jobs = {
 
 cloud_sql_instances = {
   analytics_db = {
-    name                = "assessment-v2-1"
+    name                = "assessment-v2"
     database_version    = "POSTGRES_15"
     tier                = "db-f1-micro"
     ipv4_enabled        = true
@@ -52,7 +52,7 @@ cloud_sql_instances = {
 }
 
 cloud_sql_databases = {
-  webshop_analytics = {
-    instance = "assessment-v2-1"
+  webshop_analytics_1 = {
+    instance = "assessment-v2"
   }
 }
